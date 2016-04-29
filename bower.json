@@ -1,6 +1,6 @@
 {
   "name": "things-attached-file",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "authors": [
     "Hatio Lab. <heartyoh@hatiolab.com>"
   ],
@@ -26,10 +26,10 @@
     "things-resource-selector": "ThingsElements/things-resource-selector#latest",
     "things-grid": "ThingsElements/things-grid#latest",
     "things-upload": "ThingsElements/things-upload#latest",
-    "things-ajax": "ThingsElements/things-ajax#latest3",
+    "things-ajax": "ThingsElements/things-ajax#latest",
     "things-view-open-behavior": "ThingsElements/things-view-open-behavior#latest",
     "things-meta": "ThingsElements/things-meta#latest",
-    "things-msg-box-behavior": "ThingsElements/things-msg-box-behavior#latest3",
+    "things-msg-box-behavior": "ThingsElements/things-msg-box-behavior#latest",
     "things-global-behavior": "ThingsElements/things-global-behavior#latest5",
     "things-button": "ThingsElements/things-button#latest5"
   },
