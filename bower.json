@@ -31,6 +31,7 @@
     "things-meta": "ThingsElements/things-meta#^0.0.1",
     "things-msg-box-behavior": "ThingsElements/things-msg-box-behavior#^0.0.13",
     "things-global-behavior": "ThingsElements/things-global-behavior#^0.0.15",
+    "things-button": "ThingsElements/things-button#^0.0.15"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
