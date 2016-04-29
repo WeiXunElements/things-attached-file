@@ -11,12 +11,12 @@
 <link rel="import" href="../things-button/things-button.html">
 <link rel="import" href="../things-resource-selector/things-resource-selector-behavior.html">
 <link rel="import" href="../things-grid/things-resource-grid.html">
-<link rel="import" href="../things-upload/things-upload.html">
+<link rel="import" href="../things-file-upload/things-upload.html">
 <link rel="import" href="../things-ajax/things-ajax.html">
 
 <link rel="import" href="../things-view-open-behavior/things-view-open-behavior.html">
 <link rel="import" href="../things-meta/things-resource-meta-behavior.html">
-<link rel="import" href="../things-route-content-behavior/things-route-content-behavior.html">
+<link rel="import" href="../things-content/things-route-content-behavior.html">
 <link rel="import" href="../things-msg-box-behavior/things-msg-box-behavior.html">
 <link rel="import" href="../things-global-behavior/things-global-behavior.html">
 
@@ -32,12 +32,12 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       resource-type="Alarm">
     </things-attached-file>
 
-@demo demo/demo-things-attached-file.html
+@demo ./things-attached-file/demo/demo-attached-file.html
 -->
 <dom-module id="things-attached-file">
   <template>
     <div class="[[layout]]">
-      <things-upload 
+      <things-file-upload 
         id="resouce-file-upload"
         target="[[targetUrl]]"
         method="POST"
@@ -46,9 +46,10 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         timeout="300000"
         selector-hidden="true"
         tag-hidden="true">
-      </things-upload>
+      </things-file-upload>
 
       <things-ajax 
+        auto
         id="resource-search"
         resource-url="[[gridSearchUrl]]"
         resource-action="index"
@@ -267,6 +268,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 
       /**
        * 쿼리 조건 설정
+       *
        * @param {String} resourceType
        * @param {String} resourceId
        */
@@ -309,41 +311,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
        */      
       loadData: function() {
         this.$['resource-search'].generateRequest();
-      },
-
-      /***************************************************************************************
-       *                            Start detail item view interface
-       ***************************************************************************************/
-
-      /**
-       * detail item view를 구성하기 위한 필수 함수 
-       * item view를 구성한다.
-       *
-       * @return {Object} resource 리소스 데이터 (Object) 혹은 리소스 아이디 (Number)
-       */
-      loadDetailData: function(resource) {
-        if(resource) {
-          var rId = (typeof(resource) === 'object') ? resource.id : resource;
-          if(!this.lastResponse || rId != this.resourceId) {
-            this.resourceId = rId;
-            this.loadData();
-          }
-        }
-      },
-
-      /**
-       * detail item view를 구성하기 위한 필수 함수 
-       * data로 부터 item view의 데이터를 직접 로딩한다. 외부에서 직접 데이터를 설정한다.
-       *
-       * @param {Object} data
-       */
-      loadDetailDataDirectly: function(data) {
-        // TODO
-      }
-
-      /***************************************************************************************
-       *                            End detail item view interface
-       ***************************************************************************************/      
+      }      
       
     });
   </script>
