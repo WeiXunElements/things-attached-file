@@ -1,6 +1,6 @@
 {
   "name": "things-attached-file",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "authors": [
     "Hatio Lab. <heartyoh@hatiolab.com>"
   ],
@@ -30,8 +30,8 @@
     "things-view-open-behavior": "ThingsElements/things-view-open-behavior",
     "things-meta": "ThingsElements/things-meta",
     "things-msg-box-behavior": "ThingsElements/things-msg-box-behavior",
-    "things-global-behavior": "ThingsElements/things-global-behavior5",
-    "things-button": "ThingsElements/things-button5"
+    "things-global-behavior": "ThingsElements/things-global-behavior",
+    "things-button": "ThingsElements/things-button"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
