@@ -37,7 +37,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 <dom-module id="things-attached-file">
   <template>
     <div class="[[layout]]">
-      <things-file-upload 
+      <things-upload 
         id="resouce-file-upload"
         target="[[targetUrl]]"
         method="POST"
@@ -46,7 +46,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         timeout="300000"
         selector-hidden="true"
         tag-hidden="true">
-      </things-file-upload>
+      </things-upload>
 
       <things-ajax 
         id="resource-search"
