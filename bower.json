@@ -1,16 +1,16 @@
 {
-  "name": "things-date-picker",
-  "version": "0.0.13",
+  "name": "things-attached-file",
+  "version": "0.0.1",
   "authors": [
     "Hatio Lab. <heartyoh@hatiolab.com>"
   ],
-  "description": "An element providing Date Picker, Time Picker and Date Range Pickger (things-date-from-to).",
+  "description": "An element providing things-attached-file.",
   "keywords": [
     "web-component",
     "polymer",
     "seed"
   ],
-  "main": "things-date-picker.html",
+  "main": "things-attached-file.html",
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/ThingsElements/seed-element/",
   "ignore": [
@@ -19,12 +19,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
-    "things-button": "ThingsElements/things-button#^0.0.1",
-    "paper-dialog": "^1.0.4",
-    "paper-icon-button": "^1.0.7",
-    "paper-time-picker": "bendavis78/paper-time-picker#^1.1.2",
-    "paper-date-picker": "bendavis78/paper-date-picker#^1.1.3",
-    "things-msg-box-behavior": "ThingsElements/things-msg-box-behavior"
+    "things-button": "ThingsElements/things-button#^0.0.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

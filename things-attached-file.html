@@ -1,0 +1,350 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/social-icons.html">
+<link rel="import" href="../iron-icons/maps-icons.html">
+<link rel="import" href="../iron-iconset/iron-iconset.html">
+<link rel="import" href="../iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../things-button/things-button.html">
+<link rel="import" href="../things-resource-selector/things-resource-selector-behavior.html">
+<link rel="import" href="../things-grid/things-resource-grid.html">
+<link rel="import" href="../things-upload/things-upload.html">
+<link rel="import" href="../things-ajax/things-ajax.html">
+
+<link rel="import" href="../things-view-open-behavior/things-view-open-behavior.html">
+<link rel="import" href="../things-meta/things-resource-meta-behavior.html">
+<link rel="import" href="../things-content/things-route-content-behavior.html">
+<link rel="import" href="../things-msg-box-behavior/things-msg-box-behavior.html">
+<link rel="import" href="../things-global-behavior/things-global-behavior.html">
+
+<!--
+things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트
+
+  Example:
+
+    <things-attached-file
+      target-url="upload/attach"
+      method="POST"
+      resource-id="1"
+      resource-type="Alarm">
+    </things-attached-file>
+
+@demo demo/demo-things-attached-file.html
+-->
+<dom-module id="things-attached-file">
+  <template>
+    <div class="[[layout]]">
+      <things-file-upload 
+        id="resouce-file-upload"
+        target="[[targetUrl]]"
+        method="POST"
+        resource-id="[[resourceId]]"
+        resource-type="[[resourceType]]"
+        timeout="300000"
+        selector-hidden="true"
+        tag-hidden="true">
+      </things-file-upload>
+
+      <things-ajax 
+        id="resource-search"
+        resource-url="[[gridSearchUrl]]"
+        resource-action="index"
+        select-fields="[[selectFields]]"
+        sort-fields="[[sortFields]]"
+        query-fields="[[queryFields]]"
+        last-response="{{lastResponse}}">
+      </things-ajax>
+
+      <things-resource-grid 
+        id="grid"
+        grid-height=235
+        config="[[gridConfig]]"
+        model="[[gridModel]]" 
+        columns="[[gridColumns]]"
+        buttons="[[buttons]]"
+        grid-save-action="[[gridSaveUrl]]"
+        data="[[lastResponse.items]]"
+        enable-detail-column
+        enable-toolbar>
+      </things-resource-grid>
+    </div>
+  </template>
+
+  <script>    
+    Polymer({
+      is: 'things-attached-file',
+
+      behaviors: [
+        Things.MsgBoxBehavior,
+        Things.GlobalBehavior
+      ],
+
+      properties: {
+
+        /**
+         *  Resource Type
+         */
+        resourceType: {
+          type: String
+        },
+
+        /**
+         * Resouce id
+         */
+        resourceId: {
+          type: String
+        },
+
+        /**
+         * 버튼 리스트 세팅
+         */
+        buttons : {
+          type: Array,
+          value: [{
+            id: 'delete-btn',
+            text: 'delete',
+            icon: 'icons:delete'
+          }, {
+            id: 'save-btn',
+            text: 'save',
+            icon: 'icons:save'
+          }]
+        },          
+
+        /**
+         * Grid Model
+         */
+        gridModel: {
+          type: Array,
+          value: [{
+            fieldName: 'id'
+          }, {
+            fieldName: 'name'
+          }, {
+            fieldName: 'storage_info',
+            dataType: 'object'
+          }, {
+            fieldName: 'tag'            
+          },  {
+            fieldName: 'path'            
+          }, {
+            fieldName: 'file_size',
+            dataType: 'number'
+          }, {
+            fieldName: 'creator',
+            dataType: 'object'
+          }, {
+            fieldName: 'created_at'
+          }]
+        },      
+
+        /**
+         * Grid Columns
+         */
+        gridColumns: {
+          type: Array,
+          value: [ {
+            fieldName: 'id',
+            width: 0
+          }, {
+            fieldName: 'name',
+            width: 150
+          }, {
+            name: 'storage_info',
+            fieldName: 'storage_info',
+            width: 120,
+            valueType: 'text',
+            type: 'calced',
+            header: {
+              text : 'Storage'
+            },
+            valueCallback : function(column, row) {
+              var obj = row.getValue('storage_info');
+              return obj ? obj.name : '';
+            }
+          }, {
+            fieldName: 'tag',
+            width: 100
+          }, {
+            fieldName: 'path',
+            width: 400
+          }, {
+            fieldName: 'file_size',
+            styles: {
+              numberFormat: "#,###",
+              textAlignment: 'far'
+            },
+            width: 80
+          }, {
+            name: 'creator',
+            fieldName: 'creator',
+            width: 100,
+            valueType: 'text',
+            type: 'calced',
+            header: {
+              text : 'Creator'
+            },
+            valueCallback : function(column, row) {
+              var obj = row.getValue('creator');
+              return obj ? obj.name : '';
+            }
+          }, {
+            fieldName: 'created_at',
+            width: 130
+          } ]
+        },
+
+        /**
+         * Select field 
+         * 쿼리 필드 설정
+         * 
+         * @type {String}
+         */
+        selectFields: {
+          type: String,
+          value: 'id,name,storage_info,tag,path,file_size,creator,created_at'
+        },
+
+        /**
+         * Sort field 
+         * 소팅 필드 설정
+         * 
+         * @type {String}
+         */
+        sortFields: {
+          type: Array,
+          value: [ {
+            field: 'created_at',
+            ascending: false
+          } ]
+        },
+
+        /**
+         * Query field 
+         * 쿼리 조건 설정
+         * 
+         * @type {Object}
+         */
+        queryFields: {
+          type: Array,
+          computed: '_computeQueryFields(resourceType, resourceId)'
+        },
+
+        /**
+         * Grid Search URL 
+         */
+        gridSearchUrl: {
+          type: String,
+          value: 'attachments'
+        },
+
+        /**
+         * 그리드 저장 (Multiple Save) URL
+         */
+        gridSaveUrl: {
+          type: String,
+          value: 'attachments/update_multiple'
+        },        
+
+        /**
+         * upload target url
+         */
+        targetUrl: {
+          type: String,
+          value: 'upload/attach'
+        }
+      },
+
+      listeners: {
+        'grid.things-grid-detail-tap': '_onDetailButtonTap',
+        'grid.things-grid-save-success': 'loadData',
+        'grid.things-grid-resource-column-edit': '_openResourceSelector',
+        'things-upload-response': 'loadData'
+      },
+
+      /**
+       * 쿼리 조건 설정
+       * @param {String} resourceType
+       * @param {String} resourceId
+       */
+      _computeQueryFields: function(resourceType, resourceId) {
+        if(!this.queryFields || this.queryFields.length == 0) {
+          return [ {
+            name: 'onType',
+            operator: 'eq',
+            value: this.resourceType
+          }, {
+            name: 'onId',
+            operator: 'eq',
+            value: this.resourceId
+          } ];
+        } else {
+          var newQueryFields = this.queryFields;
+          newQueryFields[0].value = this.resourceType;
+          newQueryFields[1].value = this.resourceId;
+          return newQueryFields;
+        }
+      },
+
+      /**
+       * Detail icon 클릭시 Download
+       */
+      _onDetailButtonTap: function(e) {
+        var baseUrl = this.get('globals.baseUrl');
+        this.openConfirmMsg({
+          title : 'Do you want to download file?',
+          type : 'info',
+          text : 'You can download file'
+        }, function() {
+          window.location = baseUrl + '/download/' + e.detail.id;
+        });
+      },
+
+      /**
+       * detail item view를 구성하기 위한 필수 함수 
+       * load data
+       */      
+      loadData: function() {
+        this.$['resource-search'].generateRequest();
+      },
+
+      /***************************************************************************************
+       *                            Start detail item view interface
+       ***************************************************************************************/
+
+      /**
+       * detail item view를 구성하기 위한 필수 함수 
+       * item view를 구성한다.
+       *
+       * @return {Object} resource 리소스 데이터 (Object) 혹은 리소스 아이디 (Number)
+       */
+      loadDetailData: function(resource) {
+        if(resource) {
+          var rId = (typeof(resource) === 'object') ? resource.id : resource;
+          if(!this.lastResponse || rId != this.resourceId) {
+            this.resourceId = rId;
+            this.loadData();
+          }
+        }
+      },
+
+      /**
+       * detail item view를 구성하기 위한 필수 함수 
+       * data로 부터 item view의 데이터를 직접 로딩한다. 외부에서 직접 데이터를 설정한다.
+       *
+       * @param {Object} data
+       */
+      loadDetailDataDirectly: function(data) {
+        // TODO
+      }
+
+      /***************************************************************************************
+       *                            End detail item view interface
+       ***************************************************************************************/      
+      
+    });
+  </script>
+</dom-module>

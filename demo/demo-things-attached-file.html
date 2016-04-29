@@ -2,25 +2,28 @@
 <!--
 @license
 Copyright (c) 2016 The Things Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at https://github.com/ThingsElements/things-date-picker/LICENSE.txt
-The complete set of authors may be found at https://github.com/ThingsElements/things-date-picker/AUTHORS.txt
-The complete set of contributors may be found at https://github.com/ThingsElements/things-date-picker/CONTRIBUTORS.txt
+This code may only be used under the BSD style license found at https://github.com/ThingsElements/things-attached-file/LICENSE.txt
+The complete set of authors may be found at https://github.com/ThingsElements/things-attached-file/AUTHORS.txt
+The complete set of contributors may be found at https://github.com/ThingsElements/things-attached-file/CONTRIBUTORS.txt
 Code distributed by Hatiolab as part of the things project is also
-subject to an additional IP rights grant found at https://github.com/ThingsElements/things-date-picker/PATENTS.txt
+subject to an additional IP rights grant found at https://github.com/ThingsElements/things-attached-file/PATENTS.txt
 -->
 <html>
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-  <title>things-date-from-to demo</title>
+  <title>things-attached-file demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
 
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  
-  <link rel="import" href="../things-date-from-to.html">
+  <link rel="import" href="../../paper-input/paper-input.html">
+  <link rel="import" href="../../paper-styles/color.html">
+  <link rel="import" href="../../paper-toast/paper-toast.html">  
+
+  <link rel="import" href="../things-attached-file.html">
 
   <style is="custom-style">
 
@@ -61,19 +64,19 @@ subject to an additional IP rights grant found at https://github.com/ThingsEleme
 <body unresolved>
   <demo-snippet class="centered-demo">
     <template>
-      <sample-date-from-to></sample-date-from-to>
+      <sample-attached-file></sample-attached-file>
 
-      <dom-module id="sample-date-from-to">
+      <dom-module id="sample-attached-file">
         <template>
-          <things-date-from-to 
-            locale="ko" 
-            read-format="YYYY-MM-DD">
-          </things-date-from-to>
+          <things-attached-file
+            entity-id="1"
+            entity-type="Alarm">
+          </things-attached-file>
         </template>
 
         <script>
           Polymer({
-            is: "sample-date-from-to"
+            is: "sample-attached-file"
           });
         </script>
       </dom-module>
