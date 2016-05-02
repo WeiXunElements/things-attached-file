@@ -32,7 +32,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       resource-type="Alarm">
     </things-attached-file>
 
-@demo ./things-attached-file/demo/demo-attached-file.html
+@demo demo/demo-things-attached-file.html
 -->
 <dom-module id="things-attached-file">
   <template>
@@ -152,6 +152,9 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
             width: 0
           }, {
             fieldName: 'name',
+            header: {
+              text: Things.DataGlobal.t('label.name')
+            },
             width: 150
           }, {
             name: 'storage_info',
@@ -160,7 +163,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
             valueType: 'text',
             type: 'calced',
             header: {
-              text : 'Storage'
+              text: Things.DataGlobal.t('label.storage_info')
             },
             valueCallback : function(column, row) {
               var obj = row.getValue('storage_info');
@@ -168,12 +171,21 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
             }
           }, {
             fieldName: 'tag',
+            header: {
+              text: Things.DataGlobal.t('label.tag')
+            },
             width: 100
           }, {
             fieldName: 'path',
+            header: {
+              text: Things.DataGlobal.t('label.path')  
+            },
             width: 400
           }, {
             fieldName: 'file_size',
+            header: {
+              text: Things.DataGlobal.t('label.file_size')
+            },
             styles: {
               numberFormat: "#,###",
               textAlignment: 'far'
@@ -182,18 +194,21 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
           }, {
             name: 'creator',
             fieldName: 'creator',
+            header: {
+              text: Things.DataGlobal.t('label.creator')
+            },
             width: 100,
             valueType: 'text',
             type: 'calced',
-            header: {
-              text : 'Creator'
-            },
             valueCallback : function(column, row) {
               var obj = row.getValue('creator');
               return obj ? obj.name : '';
             }
           }, {
             fieldName: 'created_at',
+            header: {
+              text: Things.DataGlobal.t('label.created_at')
+            },
             width: 130
           } ]
         },
