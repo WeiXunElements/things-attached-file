@@ -36,42 +36,51 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 -->
 <dom-module id="things-attached-file">
   <template>
-    <div class="[[layout]]">
-      <things-file-upload 
-        id="resouce-file-upload"
-        target="[[targetUrl]]"
-        method="POST"
-        resource-id="[[resourceId]]"
-        resource-type="[[resourceType]]"
-        timeout="300000"
-        selector-hidden="true"
-        tag-hidden="true">
-      </things-file-upload>
+    <style>
+      :host {
+        display: block;
+        @apply(--layout-vertical);
+      }
 
-      <things-ajax 
-        auto
-        id="resource-search"
-        resource-url="[[gridSearchUrl]]"
-        resource-action="index"
-        select-fields="[[selectFields]]"
-        sort-fields="[[sortFields]]"
-        query-fields="[[queryFields]]"
-        last-response="{{lastResponse}}">
-      </things-ajax>
+      things-resource-grid {
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+      }
+    </style>
 
-      <things-resource-grid 
-        id="grid"
-        grid-height=235
-        config="[[gridConfig]]"
-        model="[[gridModel]]" 
-        columns="[[gridColumns]]"
-        buttons="[[buttons]]"
-        grid-save-action="[[gridSaveUrl]]"
-        data="[[lastResponse.items]]"
-        enable-detail-column
-        enable-toolbar>
-      </things-resource-grid>
-    </div>
+    <things-file-upload 
+      id="resouce-file-upload"
+      target="[[targetUrl]]"
+      method="POST"
+      resource-id="[[resourceId]]"
+      resource-type="[[resourceType]]"
+      timeout="300000"
+      selector-hidden="true"
+      tag-hidden="true">
+    </things-file-upload>
+
+    <things-ajax 
+      auto
+      id="resource-search"
+      resource-url="[[gridSearchUrl]]"
+      resource-action="index"
+      select-fields="[[selectFields]]"
+      sort-fields="[[sortFields]]"
+      query-fields="[[queryFields]]"
+      last-response="{{lastResponse}}">
+    </things-ajax>
+
+    <things-resource-grid 
+      id="grid"
+      config="[[gridConfig]]"
+      model="[[gridModel]]" 
+      columns="[[gridColumns]]"
+      buttons="[[buttons]]"
+      grid-save-action="[[gridSaveUrl]]"
+      data="[[lastResponse.items]]"
+      enable-detail-column
+      enable-toolbar>
+    </things-resource-grid>
   </template>
 
   <script>    
@@ -312,9 +321,10 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       _onDetailButtonTap: function(e) {
         var baseUrl = this.get('globals.baseUrl');
         this.openConfirmMsg({
-          title : 'Do you want to download file?',
           type : 'info',
-          text : 'You can download file'
+          title : Things.DataGlobal.t('text.Want to download file'),
+          text : Things.DataGlobal.t('text.You can download file'),
+          showCancelButton : true
         }, function() {
           window.location = baseUrl + '/download/' + e.detail.id;
         });
