@@ -9,7 +9,6 @@
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 
 <link rel="import" href="../things-button/things-button.html">
-<link rel="import" href="../things-resource-selector/things-resource-selector-behavior.html">
 <link rel="import" href="../things-grid/things-resource-grid.html">
 <link rel="import" href="../things-upload/things-upload.html">
 <link rel="import" href="../things-ajax/things-ajax.html">
@@ -285,7 +284,6 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       listeners: {
         'grid.things-grid-detail-tap': '_onDetailButtonTap',
         'grid.things-grid-save-success': 'loadData',
-        'grid.things-grid-resource-column-edit': '_openResourceSelector',
         'things-upload-response': 'loadData'
       },
 
