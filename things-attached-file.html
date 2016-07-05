@@ -154,70 +154,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
          */
         gridColumns: {
           type: Array,
-          value: [ {
-            fieldName: 'id',
-            width: 0
-          }, {
-            fieldName: 'name',
-            header: {
-              text: Things.DataGlobal.t('label.name')
-            },
-            width: 150
-          }, {
-            name: 'storage_info',
-            fieldName: 'storage_info',
-            width: 120,
-            valueType: 'text',
-            type: 'calced',
-            header: {
-              text: Things.DataGlobal.t('label.storage_info')
-            },
-            valueCallback : function(column, row) {
-              var obj = row.getValue('storage_info');
-              return obj ? obj.name : '';
-            }
-          }, {
-            fieldName: 'tag',
-            header: {
-              text: Things.DataGlobal.t('label.tag')
-            },
-            width: 100
-          }, {
-            fieldName: 'path',
-            header: {
-              text: Things.DataGlobal.t('label.path')  
-            },
-            width: 400
-          }, {
-            fieldName: 'file_size',
-            header: {
-              text: Things.DataGlobal.t('label.file_size')
-            },
-            styles: {
-              numberFormat: "#,###",
-              textAlignment: 'far'
-            },
-            width: 80
-          }, {
-            name: 'creator',
-            fieldName: 'creator',
-            header: {
-              text: Things.DataGlobal.t('label.creator')
-            },
-            width: 100,
-            valueType: 'text',
-            type: 'calced',
-            valueCallback : function(column, row) {
-              var obj = row.getValue('creator');
-              return obj ? obj.name : '';
-            }
-          }, {
-            fieldName: 'created_at',
-            header: {
-              text: Things.DataGlobal.t('label.created_at')
-            },
-            width: 130
-          } ]
+          value:[]
         },
 
         /**
@@ -286,7 +223,72 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         'grid.things-grid-save-success': 'loadData',
         'things-upload-response': 'loadData'
       },
-
+      attached: function(){
+        this.gridColumns=  [ {
+            fieldName: 'id',
+            width: 0
+          }, {
+            fieldName: 'name',
+            header: {
+              text: Things.DataGlobal.t('label.name')
+            },
+            width: 150
+          }, {
+            name: 'storage_info',
+            fieldName: 'storage_info',
+            width: 120,
+            valueType: 'text',
+            type: 'calced',
+            header: {
+              text: Things.DataGlobal.t('label.storage_info')
+            },
+            valueCallback : function(column, row) {
+              var obj = row.getValue('storage_info');
+              return obj ? obj.name : '';
+            }
+          }, {
+            fieldName: 'tag',
+            header: {
+              text: Things.DataGlobal.t('label.tag')
+            },
+            width: 100
+          }, {
+            fieldName: 'path',
+            header: {
+              text: Things.DataGlobal.t('label.path')  
+            },
+            width: 400
+          }, {
+            fieldName: 'file_size',
+            header: {
+              text: Things.DataGlobal.t('label.file_size')
+            },
+            styles: {
+              numberFormat: "#,###",
+              textAlignment: 'far'
+            },
+            width: 80
+          }, {
+            name: 'creator',
+            fieldName: 'creator',
+            header: {
+              text: Things.DataGlobal.t('label.creator')
+            },
+            width: 100,
+            valueType: 'text',
+            type: 'calced',
+            valueCallback : function(column, row) {
+              var obj = row.getValue('creator');
+              return obj ? obj.name : '';
+            }
+          }, {
+            fieldName: 'created_at',
+            header: {
+              text: Things.DataGlobal.t('label.created_at')
+            },
+            width: 130
+          } ]
+      },
       /**
        * 쿼리 조건 설정
        *
