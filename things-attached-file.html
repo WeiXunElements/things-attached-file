@@ -298,13 +298,13 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       _computeQueryFields: function(resourceType, resourceId) {
         if(!this.queryFields || this.queryFields.length == 0) {
           return [ {
-            name: 'onType',
+            name: 'on_type',
             operator: 'eq',
             value: this.resourceType
           }, {
-            name: 'onId',
+            name: 'on_id',
             operator: 'eq',
-            value: this.resourceId
+            value: '' + this.resourceId
           } ];
         } else {
           var newQueryFields = this.queryFields;
