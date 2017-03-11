@@ -54,7 +54,8 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       resource-type="[[resourceType]]"
       timeout="300000"
       selector-hidden="true"
-      tag-hidden="true">
+      tag-hidden="true"
+      hidden="[[hideUpload]]">
     </things-file-upload>
 
     <things-ajax 
@@ -91,7 +92,6 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       ],
 
       properties: {
-
         /**
          *  Resource Type
          */
@@ -120,7 +120,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
             text: 'save',
             icon: 'icons:save'
           }]
-        },          
+        },
 
         /**
          * Grid Model
@@ -135,9 +135,9 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
             fieldName: 'storage_info',
             dataType: 'object'
           }, {
-            fieldName: 'tag'            
+            fieldName: 'tag'
           },  {
-            fieldName: 'path'            
+            fieldName: 'path'
           }, {
             fieldName: 'file_size',
             dataType: 'number'
@@ -147,7 +147,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
           }, {
             fieldName: 'created_at'
           }]
-        },      
+        },
 
         /**
          * Grid Columns
@@ -207,88 +207,98 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         gridSaveUrl: {
           type: String,
           value: 'attachments/update_multiple'
-        },        
+        },
 
         /**
-         * upload target url
+         * Upload target url
          */
         targetUrl: {
           type: String,
           value: 'upload/attach'
+        },
+
+        /**
+         * Hide Upload 
+         */
+        hideUpload: {
+          type: Boolean,
+          value: false
         }
       },
 
       listeners: {
-        'grid.things-grid-detail-tap': '_onDetailButtonTap',
+        'grid.things-grid-detail-tap': 'downloadFile',
         'grid.things-grid-save-success': 'loadData',
         'things-upload-response': 'loadData'
       },
-      attached: function(){
-        this.gridColumns=  [ {
-            fieldName: 'id',
-            width: 0
-          }, {
-            fieldName: 'name',
-            header: {
-              text: Things.DataGlobal.t('label.name')
-            },
-            width: 150
-          }, {
-            name: 'storage_info',
-            fieldName: 'storage_info',
-            width: 120,
-            valueType: 'text',
-            type: 'calced',
-            header: {
-              text: Things.DataGlobal.t('label.storage_info')
-            },
-            valueCallback : function(column, row) {
-              var obj = row.getValue('storage_info');
-              return obj ? obj.name : '';
-            }
-          }, {
-            fieldName: 'tag',
-            header: {
-              text: Things.DataGlobal.t('label.tag')
-            },
-            width: 100
-          }, {
-            fieldName: 'path',
-            header: {
-              text: Things.DataGlobal.t('label.path')  
-            },
-            width: 400
-          }, {
-            fieldName: 'file_size',
-            header: {
-              text: Things.DataGlobal.t('label.file_size')
-            },
-            styles: {
-              numberFormat: "#,###",
-              textAlignment: 'far'
-            },
-            width: 80
-          }, {
-            name: 'creator',
-            fieldName: 'creator',
-            header: {
-              text: Things.DataGlobal.t('label.creator')
-            },
-            width: 100,
-            valueType: 'text',
-            type: 'calced',
-            valueCallback : function(column, row) {
-              var obj = row.getValue('creator');
-              return obj ? obj.name : '';
-            }
-          }, {
-            fieldName: 'created_at',
-            header: {
-              text: Things.DataGlobal.t('label.created_at')
-            },
-            width: 130
-          } ]
+
+      attached: function() {
+        this.gridColumns = [ {
+          fieldName: 'id',
+          width: 0
+        }, {
+          fieldName: 'name',
+          header: {
+            text: Things.DataGlobal.t('label.name')
+          },
+          width: 150
+        }, {
+          name: 'storage_info',
+          fieldName: 'storage_info',
+          width: 120,
+          valueType: 'text',
+          type: 'calced',
+          header: {
+            text: Things.DataGlobal.t('label.storage_info')
+          },
+          valueCallback : function(column, row) {
+            var obj = row.getValue('storage_info');
+            return obj ? obj.name : '';
+          }
+        }, {
+          fieldName: 'tag',
+          header: {
+            text: Things.DataGlobal.t('label.tag')
+          },
+          width: 100
+        }, {
+          fieldName: 'path',
+          header: {
+            text: Things.DataGlobal.t('label.path')  
+          },
+          width: 400
+        }, {
+          fieldName: 'file_size',
+          header: {
+            text: Things.DataGlobal.t('label.file_size')
+          },
+          styles: {
+            numberFormat: "#,###",
+            textAlignment: 'far'
+          },
+          width: 80
+        }, {
+          name: 'creator',
+          fieldName: 'creator',
+          header: {
+            text: Things.DataGlobal.t('label.creator')
+          },
+          width: 100,
+          valueType: 'text',
+          type: 'calced',
+          valueCallback : function(column, row) {
+            var obj = row.getValue('creator');
+            return obj ? obj.name : '';
+          }
+        }, {
+          fieldName: 'created_at',
+          header: {
+            text: Things.DataGlobal.t('label.created_at')
+          },
+          width: 130
+        } ];
       },
+
       /**
        * 쿼리 조건 설정
        *
@@ -317,7 +327,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       /**
        * Detail icon 클릭시 Download
        */
-      _onDetailButtonTap: function(e) {
+      downloadFile: function(e) {
         var baseUrl = this.get('globals.baseUrl');
         this.openConfirmMsg({
           type : 'info',
@@ -332,11 +342,10 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       /**
        * detail item view를 구성하기 위한 필수 함수 
        * load data
-       */      
+       */
       loadData: function() {
         this.$['resource-search'].generateRequest();
-      }      
-      
+      }
     });
   </script>
 </dom-module>
