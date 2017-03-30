@@ -4,7 +4,7 @@
   "authors": [
     "Hatio Lab. <heartyoh@hatiolab.com>"
   ],
-  "description": "An element providing things-attached-file.",
+  "description": "첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트.",
   "keywords": [
     "web-component",
     "polymer",

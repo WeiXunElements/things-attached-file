@@ -19,7 +19,7 @@
 <link rel="import" href="../things-global-behavior/things-global-behavior.html">
 
 <!--
-things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트
+#### things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트
 
   Example:
 
@@ -46,7 +46,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       }
     </style>
 
-    <things-file-upload 
+    <things-file-upload
       id="resouce-file-upload"
       target="[[targetUrl]]"
       method="POST"
@@ -58,7 +58,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       hidden="[[hideUpload]]">
     </things-file-upload>
 
-    <things-ajax 
+    <things-ajax
       auto
       id="resource-search"
       resource-url="[[gridSearchUrl]]"
@@ -69,10 +69,10 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       last-response="{{lastResponse}}">
     </things-ajax>
 
-    <things-resource-grid 
+    <things-resource-grid
       id="grid"
       config="[[gridConfig]]"
-      model="[[gridModel]]" 
+      model="[[gridModel]]"
       columns="[[gridColumns]]"
       buttons="[[buttons]]"
       grid-save-action="[[gridSaveUrl]]"
@@ -82,7 +82,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
     </things-resource-grid>
   </template>
 
-  <script>    
+  <script>
     Polymer({
       is: 'things-attached-file',
 
@@ -94,6 +94,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       properties: {
         /**
          *  Resource Type
+         *  @type: String
          */
         resourceType: {
           type: String
@@ -101,6 +102,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 
         /**
          * Resouce id
+         * @type: String
          */
         resourceId: {
           type: String
@@ -108,6 +110,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 
         /**
          * 버튼 리스트 세팅
+         * @type: Array
          */
         buttons : {
           type: Array,
@@ -124,33 +127,42 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 
         /**
          * Grid Model
+         * @type: Array
          */
         gridModel: {
           type: Array,
           value: [{
             fieldName: 'id'
-          }, {
+          },
+           {
             fieldName: 'name'
-          }, {
+          },
+           {
             fieldName: 'storage_info',
             dataType: 'object'
-          }, {
+          },
+           {
             fieldName: 'tag'
-          },  {
+          },
+           {
             fieldName: 'path'
-          }, {
+          },
+           {
             fieldName: 'file_size',
             dataType: 'number'
-          }, {
+          },
+           {
             fieldName: 'creator',
             dataType: 'object'
-          }, {
+          },
+           {
             fieldName: 'created_at'
           }]
         },
 
         /**
          * Grid Columns
+         * @type: Array
          */
         gridColumns: {
           type: Array,
@@ -158,9 +170,9 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         },
 
         /**
-         * Select field 
+         * Select field
          * 쿼리 필드 설정
-         * 
+         *
          * @type {String}
          */
         selectFields: {
@@ -169,9 +181,9 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         },
 
         /**
-         * Sort field 
+         * Sort field
          * 소팅 필드 설정
-         * 
+         *
          * @type {String}
          */
         sortFields: {
@@ -183,9 +195,9 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         },
 
         /**
-         * Query field 
+         * Query field
          * 쿼리 조건 설정
-         * 
+         *
          * @type {Object}
          */
         queryFields: {
@@ -194,7 +206,8 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         },
 
         /**
-         * Grid Search URL 
+         * Grid Search URL
+         * @type: String
          */
         gridSearchUrl: {
           type: String,
@@ -203,6 +216,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 
         /**
          * 그리드 저장 (Multiple Save) URL
+         * @type: String
          */
         gridSaveUrl: {
           type: String,
@@ -211,6 +225,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
 
         /**
          * Upload target url
+         * @type: String
          */
         targetUrl: {
           type: String,
@@ -218,7 +233,8 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         },
 
         /**
-         * Hide Upload 
+         * Hide Upload
+         * @type: Boolean
          */
         hideUpload: {
           type: Boolean,
@@ -264,7 +280,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
         }, {
           fieldName: 'path',
           header: {
-            text: Things.DataGlobal.t('label.path')  
+            text: Things.DataGlobal.t('label.path')
           },
           width: 400
         }, {
@@ -340,7 +356,7 @@ things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력�
       },
 
       /**
-       * detail item view를 구성하기 위한 필수 함수 
+       * detail item view를 구성하기 위한 필수 함수
        * load data
        */
       loadData: function() {

@@ -1,7 +1,16 @@
 # things-attached-file
 
-An element providing a starting point for your own reusable Polymer elements.
+### things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트
 
+  Example:
+```html
+    <things-attached-file
+      target-url="upload/attach"
+      method="POST"
+      resource-id="1"
+      resource-type="Alarm">
+    </things-attached-file>
+```
 
 ## Dependencies
 
