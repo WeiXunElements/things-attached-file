@@ -19,7 +19,8 @@
 <link rel="import" href="../things-global-behavior/things-global-behavior.html">
 
 <!--
-#### things-attached-file. 첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트
+## things-attached-file
+#### 첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트
 
   Example:
 
@@ -93,8 +94,10 @@
 
       properties: {
         /**
-         *  Resource Type
+         *  Resource Type <u> : EntityName</u>
+         ****
          *  @type: String
+         *
          */
         resourceType: {
           type: String
@@ -110,6 +113,19 @@
 
         /**
          * 버튼 리스트 세팅
+Ex)
+```
+[{
+  id: 'delete-btn',
+  text: 'delete',
+  icon: 'icons:delete'
+}, {
+  id: 'save-btn',
+  text: 'save',
+  icon: 'icons:save'
+}]
+```
+         ****
          * @type: Array
          */
         buttons : {
@@ -126,7 +142,38 @@
         },
 
         /**
-         * Grid Model
+         * 그리드 필드 정의
+Ex)
+```
+[{
+ fieldName: 'id'
+},
+{
+ fieldName: 'name'
+},
+{
+ fieldName: 'storage_info',
+ dataType: 'object'
+},
+{
+ fieldName: 'tag'
+},
+{
+ fieldName: 'path'
+},
+{
+ fieldName: 'file_size',
+ dataType: 'number'
+},
+{
+ fieldName: 'creator',
+ dataType: 'object'
+},
+{
+ fieldName: 'created_at'
+}]
+         ```
+         ****
          * @type: Array
          */
         gridModel: {
@@ -162,6 +209,74 @@
 
         /**
          * Grid Columns
+Ex)
+```
+{
+  fieldName: 'id',
+  width: 0
+}, {
+  fieldName: 'name',
+  header: {
+    text: Things.DataGlobal.t('label.name')
+  },
+  width: 150
+}, {
+  name: 'storage_info',
+  fieldName: 'storage_info',
+  width: 120,
+  valueType: 'text',
+  type: 'calced',
+  header: {
+    text: Things.DataGlobal.t('label.storage_info')
+  },
+  valueCallback : function(column, row) {
+    var obj = row.getValue('storage_info');
+    return obj ? obj.name : '';
+  }
+}, {
+  fieldName: 'tag',
+  header: {
+    text: Things.DataGlobal.t('label.tag')
+  },
+  width: 100
+}, {
+  fieldName: 'path',
+  header: {
+    text: Things.DataGlobal.t('label.path')
+  },
+  width: 400
+}, {
+  fieldName: 'file_size',
+  header: {
+    text: Things.DataGlobal.t('label.file_size')
+  },
+  styles: {
+    numberFormat: "#,###",
+    textAlignment: 'far'
+  },
+  width: 80
+}, {
+  name: 'creator',
+  fieldName: 'creator',
+  header: {
+    text: Things.DataGlobal.t('label.creator')
+  },
+  width: 100,
+  valueType: 'text',
+  type: 'calced',
+  valueCallback : function(column, row) {
+    var obj = row.getValue('creator');
+    return obj ? obj.name : '';
+  }
+}, {
+  fieldName: 'created_at',
+  header: {
+    text: Things.DataGlobal.t('label.created_at')
+  },
+  width: 130
+}
+```
+         ****
          * @type: Array
          */
         gridColumns: {
@@ -172,7 +287,7 @@
         /**
          * Select field
          * 쿼리 필드 설정
-         *
+         *****
          * @type {String}
          */
         selectFields: {
@@ -183,7 +298,7 @@
         /**
          * Sort field
          * 소팅 필드 설정
-         *
+         *****
          * @type {String}
          */
         sortFields: {
@@ -197,7 +312,7 @@
         /**
          * Query field
          * 쿼리 조건 설정
-         *
+         *****
          * @type {Object}
          */
         queryFields: {
@@ -207,6 +322,7 @@
 
         /**
          * Grid Search URL
+         ****
          * @type: String
          */
         gridSearchUrl: {
@@ -216,6 +332,7 @@
 
         /**
          * 그리드 저장 (Multiple Save) URL
+         ****
          * @type: String
          */
         gridSaveUrl: {
@@ -225,6 +342,7 @@
 
         /**
          * Upload target url
+         ****
          * @type: String
          */
         targetUrl: {
@@ -234,6 +352,7 @@
 
         /**
          * Hide Upload
+         ****
          * @type: Boolean
          */
         hideUpload: {
@@ -249,70 +368,72 @@
       },
 
       attached: function() {
-        this.gridColumns = [ {
-          fieldName: 'id',
-          width: 0
-        }, {
-          fieldName: 'name',
-          header: {
-            text: Things.DataGlobal.t('label.name')
-          },
-          width: 150
-        }, {
-          name: 'storage_info',
-          fieldName: 'storage_info',
-          width: 120,
-          valueType: 'text',
-          type: 'calced',
-          header: {
-            text: Things.DataGlobal.t('label.storage_info')
-          },
-          valueCallback : function(column, row) {
-            var obj = row.getValue('storage_info');
-            return obj ? obj.name : '';
-          }
-        }, {
-          fieldName: 'tag',
-          header: {
-            text: Things.DataGlobal.t('label.tag')
-          },
-          width: 100
-        }, {
-          fieldName: 'path',
-          header: {
-            text: Things.DataGlobal.t('label.path')
-          },
-          width: 400
-        }, {
-          fieldName: 'file_size',
-          header: {
-            text: Things.DataGlobal.t('label.file_size')
-          },
-          styles: {
-            numberFormat: "#,###",
-            textAlignment: 'far'
-          },
-          width: 80
-        }, {
-          name: 'creator',
-          fieldName: 'creator',
-          header: {
-            text: Things.DataGlobal.t('label.creator')
-          },
-          width: 100,
-          valueType: 'text',
-          type: 'calced',
-          valueCallback : function(column, row) {
-            var obj = row.getValue('creator');
-            return obj ? obj.name : '';
-          }
-        }, {
-          fieldName: 'created_at',
-          header: {
-            text: Things.DataGlobal.t('label.created_at')
-          },
-          width: 130
-        } ];
+        if(this.gridColumns && this.gridColumns.length>0){
+          this.gridColumns = [ {
+            fieldName: 'id',
+            width: 0
+          }, {
+            fieldName: 'name',
+            header: {
+              text: Things.DataGlobal.t('label.name')
+            },
+            width: 150
+          }, {
+            name: 'storage_info',
+            fieldName: 'storage_info',
+            width: 120,
+            valueType: 'text',
+            type: 'calced',
+            header: {
+              text: Things.DataGlobal.t('label.storage_info')
+            },
+            valueCallback : function(column, row) {
+              var obj = row.getValue('storage_info');
+              return obj ? obj.name : '';
+            }
+          }, {
+            fieldName: 'tag',
+            header: {
+              text: Things.DataGlobal.t('label.tag')
+            },
+            width: 100
+          }, {
+            fieldName: 'path',
+            header: {
+              text: Things.DataGlobal.t('label.path')
+            },
+            width: 400
+          }, {
+            fieldName: 'file_size',
+            header: {
+              text: Things.DataGlobal.t('label.file_size')
+            },
+            styles: {
+              numberFormat: "#,###",
+              textAlignment: 'far'
+            },
+            width: 80
+          }, {
+            name: 'creator',
+            fieldName: 'creator',
+            header: {
+              text: Things.DataGlobal.t('label.creator')
+            },
+            width: 100,
+            valueType: 'text',
+            type: 'calced',
+            valueCallback : function(column, row) {
+              var obj = row.getValue('creator');
+              return obj ? obj.name : '';
+            }
+          }, {
+            fieldName: 'created_at',
+            header: {
+              text: Things.DataGlobal.t('label.created_at')
+            },
+            width: 130
+          } ];
+        }
       },
 
       /**
@@ -320,6 +441,16 @@
        *
        * @param {String} resourceType
        * @param {String} resourceId
+       * @return {Array}
+       ex) ```[ {
+         name: 'on_type',
+         operator: 'eq',
+         value: this.resourceType
+       }, {
+         name: 'on_id',
+         operator: 'eq',
+         value: '' + this.resourceId
+       } ]```
        */
       _computeQueryFields: function(resourceType, resourceId) {
         if(!this.queryFields || this.queryFields.length == 0) {
@@ -342,6 +473,7 @@
 
       /**
        * Detail icon 클릭시 Download
+       ****
        */
       downloadFile: function(e) {
         var baseUrl = this.get('globals.baseUrl');
@@ -357,7 +489,7 @@
 
       /**
        * detail item view를 구성하기 위한 필수 함수
-       * load data
+       ****
        */
       loadData: function() {
         this.$['resource-search'].generateRequest();
