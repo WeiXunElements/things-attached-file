@@ -1,6 +1,6 @@
 # things-attached-file
 
-### 첨부파일 목록을 서버로 부터 받아와 출력하고 파일을 다운로드 및 업로드 할 수 있는 컴퍼넌트
+### It is a component that can receive the attachment list from the server, print it, and download and upload the file.
 
   Example:
 ```html
@@ -121,37 +121,37 @@ gridColumns Ex)
 }
 ```
 
-## 2. 개발
-### 2.1 Polymer-CLI 설치
+## 2. Development
+### 2.1 Install Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-### 2.2 Application 수행
+### 2.2 Run Application
 
 ```
 $ polymer serve
 ```
 
-### 2.3 Application 빌드
+### 2.3 Build Application
 
 ```
 $ polymer build
 ```
 
-아래 명령어로 ` build/bundled`나 ` build/unbundled`에서 서버를 띄울수 있다.
+You can launch the server from `build/bundled` or `build/unbundled` with the following command:
 
 ```
 $ polymer serve build/bundled
 ```
 
-### 2.3 Running Tests
+### 2.4 Run Tests
 
 ```
 $ polymer test
 ```
 
-테스트는 [web-component-tester](https://github.com/Polymer/web-component-tester)에서 설명한데로 설정완료됨.
-아래 명령어로 테스트를 수행할 수 있다.
+The test has been set up as described in [web-component-tester](https://github.com/Polymer/web-component-tester).
+You can run the test with the following command.
 ```
 $ polymer test
 ```
