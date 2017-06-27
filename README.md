@@ -24,7 +24,6 @@ buttons Ex)
 }]
 ```
 gridModel Ex)
-Ex)
 ```js
 [{
  fieldName: 'id'
@@ -55,7 +54,6 @@ Ex)
 }]
 ```
 gridColumns Ex)
-Ex)
 ```js
 {
   fieldName: 'id',
