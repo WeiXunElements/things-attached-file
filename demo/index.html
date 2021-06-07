@@ -1,82 +1,74 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes" />
+    <title>things-attached-file demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-  <title>things-attached-file demo</title>
-  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../polymer/polymer.html" />
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html" />
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html" />
+    <link rel="import" href="../../paper-input/paper-input.html" />
+    <link rel="import" href="../../paper-styles/color.html" />
+    <link rel="import" href="../../paper-toast/paper-toast.html" />
 
-  <link rel="import" href="../../polymer/polymer.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../paper-input/paper-input.html">
-  <link rel="import" href="../../paper-styles/color.html">
-  <link rel="import" href="../../paper-toast/paper-toast.html">  
+    <link rel="import" href="../things-attached-file.html" />
 
-  <link rel="import" href="../things-attached-file.html">
+    <style is="custom-style">
+      .output {
+        margin-top: 20px;
+        word-wrap: break-word;
+        @apply (--paper-font-common-code);
+      }
+      form > paper-button {
+        width: 45%;
+        margin-top: 20px;
+      }
+      form > paper-button:not([disabled]) {
+        background: var(--paper-light-blue-500);
+        color: white;
+      }
+      button {
+        margin-top: 20px;
+      }
+      paper-spinner {
+        width: 14px;
+        height: 14px;
+        margin-right: 20px;
+      }
+      paper-dropdown-menu {
+        display: block;
+      }
+      demo-snippet {
+        --demo-snippet-code: {
+          max-height: 300px;
+        }
+      }
+    </style>
+  </head>
 
-  <style is="custom-style">
+  <body unresolved>
+    <demo-snippet class="centered-demo">
+      <template>
+        <sample-attached-file></sample-attached-file>
 
-    .output {
-      margin-top: 20px;
-      word-wrap: break-word;
-      @apply(--paper-font-common-code);
-    }
-    form > paper-button {
-      width: 45%;
-      margin-top: 20px;
-    }
-    form > paper-button:not([disabled]) {
-      background: var(--paper-light-blue-500);
-      color: white;
-    }
-    button {
-      margin-top: 20px;
-    }
-    paper-spinner {
-      width: 14px;
-      height: 14px;
-      margin-right: 20px;
-    }
-    paper-dropdown-menu {
-      display: block;
-    }
-    demo-snippet {
-      --demo-snippet-code: {
-        max-height: 300px;
-      };
-    }
+        <dom-module id="sample-attached-file">
+          <template>
+            <things-attached-file entity-id="1" entity-type="Alarm"> </things-attached-file>
+          </template>
 
-  </style>
-
-</head>
-
-<body unresolved>
-  <demo-snippet class="centered-demo">
-    <template>
-      <sample-attached-file></sample-attached-file>
-
-      <dom-module id="sample-attached-file">
-        <template>
-          <things-attached-file
-            entity-id="1"
-            entity-type="Alarm">
-          </things-attached-file>
-        </template>
-
-        <script>
-          Polymer({
-            is: "sample-attached-file"
-          });
-        </script>
-      </dom-module>
-    </template>
-  </demo-snippet>
-
-</body>
+          <script>
+            Polymer({
+              is: 'sample-attached-file',
+            });
+          </script>
+        </dom-module>
+      </template>
+    </demo-snippet>
+  </body>
 </html>

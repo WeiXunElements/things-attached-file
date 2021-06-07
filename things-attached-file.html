@@ -1,26 +1,26 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html" />
 
-<link rel="import" href="../iron-icon/iron-icon.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
-<link rel="import" href="../iron-icons/social-icons.html">
-<link rel="import" href="../iron-icons/maps-icons.html">
-<link rel="import" href="../iron-iconset/iron-iconset.html">
-<link rel="import" href="../iron-iconset-svg/iron-iconset-svg.html">
-<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-icon/iron-icon.html" />
+<link rel="import" href="../iron-icons/iron-icons.html" />
+<link rel="import" href="../iron-icons/social-icons.html" />
+<link rel="import" href="../iron-icons/maps-icons.html" />
+<link rel="import" href="../iron-iconset/iron-iconset.html" />
+<link rel="import" href="../iron-iconset-svg/iron-iconset-svg.html" />
+<link rel="import" href="../paper-icon-button/paper-icon-button.html" />
 
-<link rel="import" href="../things-button/things-button.html">
-<link rel="import" href="../things-grid/things-resource-grid.html">
-<link rel="import" href="../things-upload/things-upload.html">
-<link rel="import" href="../things-ajax/things-ajax.html">
+<link rel="import" href="../things-button/things-button.html" />
+<link rel="import" href="../things-grid/things-resource-grid.html" />
+<link rel="import" href="../things-upload/things-upload.html" />
+<link rel="import" href="../things-ajax/things-ajax.html" />
 
-<link rel="import" href="../things-view-open-behavior/things-view-open-behavior.html">
-<link rel="import" href="../things-route-content-behavior/things-route-content-behavior.html">
-<link rel="import" href="../things-msg-box-behavior/things-msg-box-behavior.html">
-<link rel="import" href="../things-global-behavior/things-global-behavior.html">
+<link rel="import" href="../things-view-open-behavior/things-view-open-behavior.html" />
+<link rel="import" href="../things-route-content-behavior/things-route-content-behavior.html" />
+<link rel="import" href="../things-msg-box-behavior/things-msg-box-behavior.html" />
+<link rel="import" href="../things-global-behavior/things-global-behavior.html" />
 
 <!--
 ## things-attached-file
@@ -38,20 +38,20 @@ Copyright © HatioLab Inc. All rights reserved.
 @demo demo/index.html
 -->
 <dom-module id="things-attached-file">
-    <template>
+  <template>
     <style>
       :host {
         display: block;
-        @apply(--layout-vertical);
+        @apply (--layout-vertical);
       }
 
       things-resource-grid {
-        @apply(--layout-flex);
-        @apply(--layout-vertical);
+        @apply (--layout-flex);
+        @apply (--layout-vertical);
       }
 
       things-file-upload::shadow things-upload {
-          padding: 0px !important;
+        padding: 0px !important;
       }
     </style>
 
@@ -64,7 +64,8 @@ Copyright © HatioLab Inc. All rights reserved.
       timeout="300000"
       selector-hidden="true"
       tag-hidden="true"
-      hidden="[[hideUpload]]">
+      hidden="[[hideUpload]]"
+    >
     </things-file-upload>
 
     <things-ajax
@@ -75,7 +76,8 @@ Copyright © HatioLab Inc. All rights reserved.
       select-fields="[[selectFields]]"
       sort-fields="[[sortFields]]"
       query-fields="[[queryFields]]"
-      last-response="{{lastResponse}}">
+      last-response="{{lastResponse}}"
+    >
     </things-ajax>
 
     <things-resource-grid
@@ -87,39 +89,37 @@ Copyright © HatioLab Inc. All rights reserved.
       grid-save-action="[[gridSaveUrl]]"
       data="[[lastResponse.items]]"
       enable-detail-column
-      enable-toolbar>
+      enable-toolbar
+    >
     </things-resource-grid>
   </template>
 
-    <script>
-        Polymer({
-            is: 'things-attached-file',
+  <script>
+    Polymer({
+      is: 'things-attached-file',
 
-            behaviors: [
-                Things.MsgBoxBehavior,
-                Things.GlobalBehavior
-            ],
+      behaviors: [Things.MsgBoxBehavior, Things.GlobalBehavior],
 
-            properties: {
-                /**
-                 *  Resource Type <u> : EntityName</u>
-                 ****
-                 *  @type: String
-                 *
-                 */
-                resourceType: {
-                    type: String
-                },
+      properties: {
+        /**
+         *  Resource Type <u> : EntityName</u>
+         ****
+         *  @type: String
+         *
+         */
+        resourceType: {
+          type: String,
+        },
 
-                /**
-                 * Resouce id
-                 * @type: String
-                 */
-                resourceId: {
-                    type: String
-                },
+        /**
+         * Resouce id
+         * @type: String
+         */
+        resourceId: {
+          type: String,
+        },
 
-                /**
+        /**
          * 버튼 리스트 세팅
 Ex)
 ```
@@ -136,20 +136,23 @@ Ex)
          ****
          * @type: Array
          */
-                buttons: {
-                    type: Array,
-                    value: [{
-                        id: 'delete-btn',
-                        text: 'delete',
-                        icon: 'icons:delete'
-                    }, {
-                        id: 'save-btn',
-                        text: 'save',
-                        icon: 'icons:save'
-                    }]
-                },
+        buttons: {
+          type: Array,
+          value: [
+            {
+              id: 'delete-btn',
+              text: 'delete',
+              icon: 'icons:delete',
+            },
+            {
+              id: 'save-btn',
+              text: 'save',
+              icon: 'icons:save',
+            },
+          ],
+        },
 
-                /**
+        /**
          * 그리드 필드 정의
 Ex)
 ```
@@ -184,31 +187,40 @@ Ex)
          ****
          * @type: Array
          */
-                gridModel: {
-                    type: Array,
-                    value: [{
-                        fieldName: 'id'
-                    }, {
-                        fieldName: 'name'
-                    }, {
-                        fieldName: 'storage_info',
-                        dataType: 'object'
-                    }, {
-                        fieldName: 'tag'
-                    }, {
-                        fieldName: 'path'
-                    }, {
-                        fieldName: 'file_size',
-                        dataType: 'number'
-                    }, {
-                        fieldName: 'creator',
-                        dataType: 'object'
-                    }, {
-                        fieldName: 'created_at'
-                    }]
-                },
+        gridModel: {
+          type: Array,
+          value: [
+            {
+              fieldName: 'id',
+            },
+            {
+              fieldName: 'name',
+            },
+            {
+              fieldName: 'storage_info',
+              dataType: 'object',
+            },
+            {
+              fieldName: 'tag',
+            },
+            {
+              fieldName: 'path',
+            },
+            {
+              fieldName: 'file_size',
+              dataType: 'number',
+            },
+            {
+              fieldName: 'creator',
+              dataType: 'object',
+            },
+            {
+              fieldName: 'created_at',
+            },
+          ],
+        },
 
-                /**
+        /**
          * Grid Columns
 Ex)
 ```
@@ -280,164 +292,175 @@ Ex)
          ****
          * @type: Array
          */
-                gridColumns: {
-                    type: Array,
-                    value: []
-                },
+        gridColumns: {
+          type: Array,
+          value: [],
+        },
 
-                /**
-                 * Select field
-                 * 쿼리 필드 설정
-                 *****
-                 * @type {String}
-                 */
-                selectFields: {
-                    type: String,
-                    value: 'id,name,storage_info,tag,path,file_size,creator,created_at'
-                },
+        /**
+         * Select field
+         * 쿼리 필드 설정
+         *****
+         * @type {String}
+         */
+        selectFields: {
+          type: String,
+          value: 'id,name,storage_info,tag,path,file_size,creator,created_at',
+        },
 
-                /**
-                 * Sort field
-                 * 소팅 필드 설정
-                 *****
-                 * @type {String}
-                 */
-                sortFields: {
-                    type: Array,
-                    value: [{
-                        field: 'created_at',
-                        ascending: false
-                    }]
-                },
-
-                /**
-                 * Query field
-                 * 쿼리 조건 설정
-                 *****
-                 * @type {Object}
-                 */
-                queryFields: {
-                    type: Array,
-                    computed: '_computeQueryFields(resourceType, resourceId)'
-                },
-
-                /**
-                 * Grid Search URL
-                 ****
-                 * @type: String
-                 */
-                gridSearchUrl: {
-                    type: String,
-                    value: 'attachments'
-                },
-
-                /**
-                 * 그리드 저장 (Multiple Save) URL
-                 ****
-                 * @type: String
-                 */
-                gridSaveUrl: {
-                    type: String,
-                    value: 'attachments/update_multiple'
-                },
-
-                /**
-                 * Upload target url
-                 ****
-                 * @type: String
-                 */
-                targetUrl: {
-                    type: String,
-                    value: 'upload/attach'
-                },
-
-                /**
-                 * Hide Upload
-                 ****
-                 * @type: Boolean
-                 */
-                hideUpload: {
-                    type: Boolean,
-                    value: false
-                }
+        /**
+         * Sort field
+         * 소팅 필드 설정
+         *****
+         * @type {String}
+         */
+        sortFields: {
+          type: Array,
+          value: [
+            {
+              field: 'created_at',
+              ascending: false,
             },
+          ],
+        },
 
-            listeners: {
-                'grid.things-grid-detail-tap': 'downloadFile',
-                'grid.things-grid-save-success': 'loadData',
-                'things-upload-response': 'loadData'
+        /**
+         * Query field
+         * 쿼리 조건 설정
+         *****
+         * @type {Object}
+         */
+        queryFields: {
+          type: Array,
+          computed: '_computeQueryFields(resourceType, resourceId)',
+        },
+
+        /**
+         * Grid Search URL
+         ****
+         * @type: String
+         */
+        gridSearchUrl: {
+          type: String,
+          value: 'attachments',
+        },
+
+        /**
+         * 그리드 저장 (Multiple Save) URL
+         ****
+         * @type: String
+         */
+        gridSaveUrl: {
+          type: String,
+          value: 'attachments/update_multiple',
+        },
+
+        /**
+         * Upload target url
+         ****
+         * @type: String
+         */
+        targetUrl: {
+          type: String,
+          value: 'upload/attach',
+        },
+
+        /**
+         * Hide Upload
+         ****
+         * @type: Boolean
+         */
+        hideUpload: {
+          type: Boolean,
+          value: false,
+        },
+      },
+
+      listeners: {
+        'grid.things-grid-detail-tap': 'downloadFile',
+        'grid.things-grid-save-success': 'loadData',
+        'things-upload-response': 'loadData',
+      },
+
+      attached: function () {
+        if (this.gridColumns && this.gridColumns.length > 0) {
+          this.gridColumns = [
+            {
+              fieldName: 'id',
+              width: 0,
             },
-
-            attached: function() {
-                if (this.gridColumns && this.gridColumns.length > 0) {
-                    this.gridColumns = [{
-                        fieldName: 'id',
-                        width: 0
-                    }, {
-                        fieldName: 'name',
-                        header: {
-                            text: Things.DataGlobal.t('label.name')
-                        },
-                        width: 150
-                    }, {
-                        name: 'storage_info',
-                        fieldName: 'storage_info',
-                        width: 120,
-                        valueType: 'text',
-                        type: 'calced',
-                        header: {
-                            text: Things.DataGlobal.t('label.storage_info')
-                        },
-                        valueCallback: function(column, row) {
-                            var obj = row.getValue('storage_info');
-                            return obj ? obj.name : '';
-                        }
-                    }, {
-                        fieldName: 'tag',
-                        header: {
-                            text: Things.DataGlobal.t('label.tag')
-                        },
-                        width: 100
-                    }, {
-                        fieldName: 'path',
-                        header: {
-                            text: Things.DataGlobal.t('label.path')
-                        },
-                        width: 400
-                    }, {
-                        fieldName: 'file_size',
-                        header: {
-                            text: Things.DataGlobal.t('label.file_size')
-                        },
-                        styles: {
-                            numberFormat: "#,###",
-                            textAlignment: 'far'
-                        },
-                        width: 80
-                    }, {
-                        name: 'creator',
-                        fieldName: 'creator',
-                        header: {
-                            text: Things.DataGlobal.t('label.creator')
-                        },
-                        width: 100,
-                        valueType: 'text',
-                        type: 'calced',
-                        valueCallback: function(column, row) {
-                            var obj = row.getValue('creator');
-                            return obj ? obj.name : '';
-                        }
-                    }, {
-                        fieldName: 'created_at',
-                        header: {
-                            text: Things.DataGlobal.t('label.created_at')
-                        },
-                        width: 130
-                    }];
-                }
+            {
+              fieldName: 'name',
+              header: {
+                text: Things.DataGlobal.t('label.name'),
+              },
+              width: 150,
             },
+            {
+              name: 'storage_info',
+              fieldName: 'storage_info',
+              width: 120,
+              valueType: 'text',
+              type: 'calced',
+              header: {
+                text: Things.DataGlobal.t('label.storage_info'),
+              },
+              valueCallback: function (column, row) {
+                var obj = row.getValue('storage_info');
+                return obj ? obj.name : '';
+              },
+            },
+            {
+              fieldName: 'tag',
+              header: {
+                text: Things.DataGlobal.t('label.tag'),
+              },
+              width: 100,
+            },
+            {
+              fieldName: 'path',
+              header: {
+                text: Things.DataGlobal.t('label.path'),
+              },
+              width: 400,
+            },
+            {
+              fieldName: 'file_size',
+              header: {
+                text: Things.DataGlobal.t('label.file_size'),
+              },
+              styles: {
+                numberFormat: '#,###',
+                textAlignment: 'far',
+              },
+              width: 80,
+            },
+            {
+              name: 'creator',
+              fieldName: 'creator',
+              header: {
+                text: Things.DataGlobal.t('label.creator'),
+              },
+              width: 100,
+              valueType: 'text',
+              type: 'calced',
+              valueCallback: function (column, row) {
+                var obj = row.getValue('creator');
+                return obj ? obj.name : '';
+              },
+            },
+            {
+              fieldName: 'created_at',
+              header: {
+                text: Things.DataGlobal.t('label.created_at'),
+              },
+              width: 130,
+            },
+          ];
+        }
+      },
 
-            /**
+      /**
              * 쿼리 조건 설정
              *
              * @param {String} resourceType
@@ -453,48 +476,54 @@ Ex)
                value: '' + this.resourceId
              } ]```
              */
-            _computeQueryFields: function(resourceType, resourceId) {
-                if (!this.queryFields || this.queryFields.length == 0) {
-                    return [{
-                        name: 'on_type',
-                        operator: 'eq',
-                        value: this.resourceType
-                    }, {
-                        name: 'on_id',
-                        operator: 'eq',
-                        value: '' + this.resourceId
-                    }];
-                } else {
-                    var newQueryFields = this.queryFields;
-                    newQueryFields[0].value = this.resourceType;
-                    newQueryFields[1].value = this.resourceId;
-                    return newQueryFields;
-                }
+      _computeQueryFields: function (resourceType, resourceId) {
+        if (!this.queryFields || this.queryFields.length == 0) {
+          return [
+            {
+              name: 'on_type',
+              operator: 'eq',
+              value: this.resourceType,
             },
-
-            /**
-             * Detail icon 클릭시 Download
-             ****
-             */
-            downloadFile: function(e) {
-                var baseUrl = this.get('globals.baseUrl');
-                this.openConfirmMsg({
-                    type: 'info',
-                    title: Things.DataGlobal.t('text.Want to download file'),
-                    text: Things.DataGlobal.t('text.You can download file'),
-                    showCancelButton: true
-                }, function() {
-                    window.location = baseUrl + '/download/' + e.detail.id;
-                });
+            {
+              name: 'on_id',
+              operator: 'eq',
+              value: '' + this.resourceId,
             },
+          ];
+        } else {
+          var newQueryFields = this.queryFields;
+          newQueryFields[0].value = this.resourceType;
+          newQueryFields[1].value = this.resourceId;
+          return newQueryFields;
+        }
+      },
 
-            /**
-             * detail item view를 구성하기 위한 필수 함수
-             ****
-             */
-            loadData: function() {
-                this.$['resource-search'].generateRequest();
-            }
-        });
-    </script>
+      /**
+       * Detail icon 클릭시 Download
+       ****
+       */
+      downloadFile: function (e) {
+        var baseUrl = this.get('globals.baseUrl');
+        this.openConfirmMsg(
+          {
+            type: 'info',
+            title: Things.DataGlobal.t('text.Want to download file'),
+            text: Things.DataGlobal.t('text.You can download file'),
+            showCancelButton: true,
+          },
+          function () {
+            window.location = baseUrl + '/download/' + e.detail.id;
+          }
+        );
+      },
+
+      /**
+       * detail item view를 구성하기 위한 필수 함수
+       ****
+       */
+      loadData: function () {
+        this.$['resource-search'].generateRequest();
+      },
+    });
+  </script>
 </dom-module>
